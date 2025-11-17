@@ -687,7 +687,7 @@
       },
       {
         id: "dante",
-        name: "Dante",
+        name: "Daniël",
         role: "De Fluisteraar",
         short: "Sommige dingen zegt hij niet hardop. Maar je hoort ze toch.",
         teaser: "Sommige woorden spreken zichzelf uit."
@@ -705,7 +705,6 @@
     const modalEl = document.getElementById("modal");
     const modalNameEl = document.getElementById("modalName");
     const modalRoleEl = document.getElementById("modalRole");
-    const modalPortraitEl = document.getElementById("modalPortrait");
     const modalTextEl = document.getElementById("modalText");
     const modalTeaserEl = document.getElementById("modalTeaser");
     const closeModalBtn = document.getElementById("closeModalBtn");
@@ -738,7 +737,6 @@
 
       modalNameEl.textContent = ch.name;
       modalRoleEl.textContent = ch.role;
-      modalPortraitEl.textContent = ch.name + " – " + ch.role;
       modalTextEl.textContent = ch.short;
       modalTeaserEl.textContent = ch.teaser;
 
