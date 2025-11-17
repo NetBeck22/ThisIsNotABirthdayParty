@@ -120,6 +120,26 @@
       0% { transform: translateY(0) scale(1); }
       100% { transform: translateY(-20px) scale(1.03); }
     }
+@keyframes paintingFloat {
+  0% {
+    top: 0px;
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(0, 0, 0, 0.7);
+  }
+  50% {
+    top: -8px;
+    box-shadow:
+      0 16px 38px rgba(0, 0, 0, 0.85),
+      0 0 18px rgba(212, 175, 55, 0.25);
+  }
+  100% {
+    top: 0px;
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(0, 0, 0, 0.7);
+  }
+}
 
     /* HERO */
 
@@ -233,7 +253,13 @@
                   box-shadow 0.35s ease,
                   border-color 0.35s ease;
     }
-
+/* nieuwe klasse */
+.painting-floating {
+  animation-name: paintingFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
     .painting::before {
       content: "";
       position: absolute;
@@ -805,27 +831,37 @@
     const modalTeaserEl = document.getElementById("modalTeaser");
     const closeModalBtn = document.getElementById("closeModalBtn");
 
-    function createGallery() {
-      characters.forEach((ch) => {
-        const card = document.createElement("div");
-        card.className = "painting";
-        card.dataset.charId = ch.id;
+function createGallery() {
+  characters.forEach((ch) => {
+    const card = document.createElement("div");
+    card.className = "painting painting-floating"; // extra class
 
-        card.innerHTML = `
-          <div class="frame-inner">
-            <div class="portrait portrait--${ch.id}">
-              ${ch.name}
-            </div>
-          </div>
-          <div class="painting-label">
-            <div class="painting-name">${ch.name}</div>
-            <div class="painting-role">${ch.role}</div>
-          </div>
-        `;
+    card.dataset.charId = ch.id;
 
-        galleryEl.appendChild(card);
-      });
-    }
+    // willekeurige duur en delay zodat ze niet synchroon bewegen
+    const duration = 16 + Math.random() * 10; // 16–26s
+    const delay = Math.random() * 8;          // 0–8s
+    card.style.animationDuration = `${duration}s`;
+    card.style.animationDelay = `${delay}s`;
+
+    card.innerHTML = `
+      <div class="frame-inner">
+        <div class="portrait portrait--${ch.id}">
+          ${ch.name}
+        </div>
+      </div>
+      <div class="painting-label">
+        <div class="painting-name">${ch.name}</div>
+        <div class="painting-role">${ch.role}</div>
+      </div>
+    `;
+
+    galleryEl.appendChild(card);
+  });
+}
+
+
+
 
     function openModal(charId) {
       const ch = characters.find(c => c.id === charId);
