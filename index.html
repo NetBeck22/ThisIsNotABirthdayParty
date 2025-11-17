@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>This Is Not a Birthday Party</title>
+
+  <!-- Retro / chic fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #090507;
+      --bg-deep: #140b10;
+      --gold: #d4af37;
+      --gold-soft: #b3922f;
+      --bone: #f4e4bc;
+      --ink: #1b1010;
+      --frame-wood: #6b4a32;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.15), transparent 55%),
+        radial-gradient(circle at 80% 90%, rgba(120, 90, 160, 0.25), transparent 60%),
+        linear-gradient(145deg, #050307 0%, #120a0f 40%, #090507 100%);
+      color: var(--bone);
+      font-family: 'Playfair Display', serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+      z-index: 0;
+    }
+
+    body::after {
+      /* retro film grain */
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='noStitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* floating surreal deco shapes */
+
+    .floating-orb,
+    .floating-line,
+    .floating-arch {
+      position: fixed;
+      pointer-events: none;
+      opacity: 0.25;
+      z-index: 1;
+    }
+
+    .floating-orb {
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 70%);
+      top: 5%;
+      right: -40px;
+      filter: blur(1px);
+      animation: orbFloat 16s ease-in-out infinite alternate;
+    }
+
+    .floating-line {
+      width: 1px;
+      height: 260px;
+      background: linear-gradient(to bottom, transparent, rgba(244, 228, 188, 0.4), transparent);
+      left: 6%;
+      top: 18%;
+      animation: linePulse 14s ease-in-out infinite;
+    }
+
+    .floating-arch {
+      width: 260px;
+      height: 260px;
+      border-radius: 50% 50% 0 0;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-bottom: none;
+      bottom: -40px;
+      right: 10%;
+      animation: archDrift 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(30px) translateX(-20px); }
+    }
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes archDrift {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-20px) scale(1.03); }
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 228, 188, 0.85);
+      background: radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 70%);
+      margin-bottom: 12px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(34px, 6vw, 52px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin: 4px 0 10px;
+      text-shadow:
+        0 0 18px rgba(0, 0, 0, 0.85),
+        0 0 26px rgba(212, 175, 55, 0.35);
+    }
+
+    .hero-subtitle {
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(244, 228, 188, 0.8);
+      max-width: 520px;
+      margin: 0 auto 14px;
+    }
+
+    .hero-line {
+      width: 90px;
+      height: 1px;
+      margin: 14px auto 0;
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent);
+    }
+
+    .hero-meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+    }
+
+    .hero-meta span {
+      margin: 0 8px;
+      opacity: 0.8;
+    }
+
+    /* GALLERY SECTION */
+
+    .section-title {
+      margin: 40px 0 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+    }
+
+    .section-subtitle {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+      font-style: italic;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 18px;
+    }
+
+    .painting {
+      position: relative;
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(244, 228, 188, 0.14), transparent 60%),
+        linear-gradient(145deg, #27160f, #130a07);
+      padding: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      overflow: hidden;
+      transform-origin: center;
+      transition: transform 0.35s cubic-bezier(0.16, 0.84, 0.44, 1),
+                  box-shadow 0.35s ease,
+                  border-color 0.35s ease;
+    }
+
+    .painting::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(212, 175, 55, 0.14), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .painting:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(212, 175, 55, 0.8);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.9),
+        0 0 26px rgba(212, 175, 55, 0.35);
+    }
+
+    .painting:hover::before {
+      opacity: 1;
+    }
+
+    .frame-inner {
+      position: relative;
+      border-radius: 6px;
+      padding: 3px;
+      background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.8), rgba(112, 70, 35, 0.9));
+      box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+        0 0 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .portrait {
+      border-radius: 3px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.12), transparent 60%),
+        #2a1a18;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(244, 228, 188, 0.7);
+      font-size: 11px;
+      text-align: center;
+      padding: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 👉 hier later jouw echte schilderij-foto als achtergrond zetten bv:
+       .portrait--nette { background-image: url('nette.jpg'); background-size: cover; background-position: center; color: transparent; } */
+
+    .painting-label {
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .painting-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--bone);
+    }
+
+    .painting-role {
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(244, 228, 188, 0.7);
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at center, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.98));
+      z-index: 50;
+      padding: 16px;
+    }
+
+    .modal.active {
+      display: flex;
+      animation: modalIn 0.35s ease-out;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-card {
+      max-width: 620px;
+      width: 100%;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(212, 175, 55, 0.2), transparent 65%),
+        linear-gradient(135deg, #231311, #120809);
+      border-radius: 16px;
+      padding: 26px 24px 22px;
+      border: 1px solid rgba(212, 175, 55, 0.65);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(212, 175, 55, 0.35);
+      position: relative;
+    }
+
+    .modal-card::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 11px;
+      border: 1px solid rgba(244, 228, 188, 0.18);
+      pointer-events: none;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .modal-role {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(244, 228, 188, 0.8);
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .modal-portrait-frame {
+      border-radius: 10px;
+      padding: 6px;
+      background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.8), rgba(112, 70, 35, 0.9));
+      box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+        0 0 15px rgba(212, 175, 55, 0.25);
+    }
+
+    .modal-portrait {
+      border-radius: 6px;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(244, 228, 188, 0.12), transparent 60%),
+        #1b1010;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-align: center;
+      color: rgba(244, 228, 188, 0.75);
+      padding: 10px;
+    }
+
+    .modal-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(244, 228, 188, 0.9);
+    }
+
+    .modal-teaser {
+      margin-top: 10px;
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.8);
+    }
+
+    .modal-close {
+      margin-top: 18px;
+      text-align: right;
+    }
+
+    .btn-close {
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.8);
+      padding: 7px 16px;
+      background: linear-gradient(135deg, #4a2917, #2d170f);
+      color: var(--bone);
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-close:hover {
+      background: linear-gradient(135deg, #6b3b1f, #3a1e12);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* FOOTER-LINE */
+
+    .footer-line {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(244, 228, 188, 0.6);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <!-- surreal floating decor -->
+  <div class="floating-orb"></div>
+  <div class="floating-line"></div>
+  <div class="floating-arch"></div>
+
+  <main class="page">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        THIS IS NOT A BIRTHDAY PARTY
+      </div>
+      <h1 class="hero-title">CHÂTEAU NOCTURNE</h1>
+      <p class="hero-subtitle">
+        Een avondmaal, een glas, een glimlach.  
+        De rest legt het Huis later uit.
+      </p>
+      <div class="hero-line"></div>
+      <div class="hero-meta">
+        <span>Dresscode: elegant & licht overdreven</span> ·
+        <span>Tijd & plaats: enkel voor genodigden</span>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section>
+      <h2 class="section-title">DE GASTEN VAN HET HUIS</h2>
+      <p class="section-subtitle">
+        Kijk rustig. Iemand kijkt terug.
+      </p>
+
+      <div class="gallery-grid" id="gallery"></div>
+    </section>
+
+    <p class="footer-line">
+      Dit is geen moordspel. Dit is een mechanisme dat op tijd begint.
+    </p>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modalName">Naam</div>
+          <div class="modal-role" id="modalRole">Titel</div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-portrait-frame">
+          <div class="modal-portrait" id="modalPortrait">
+            Hier komt later je echte portret.
+          </div>
+        </div>
+        <div class="modal-text-wrapper">
+          <div class="modal-text" id="modalText">
+            Beschrijving van het personage komt hier.
+          </div>
+          <div class="modal-teaser" id="modalTeaser">
+            Een korte, cryptische zin.
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-close">
+        <button class="btn-close" id="closeModalBtn">SLUIT HET MYSTERIE</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Personage-data: naam, titel, korte beschrijving & teaser
+    const characters = [
+      {
+        id: "nette",
+        name: "Nette",
+        role: "De Fluwelen Slang",
+        short: "Zij glimlacht alsof elk geheim een aanbetaling is.",
+        teaser: "Elk geheim begint met een glimlach — en eindigt met een beet."
+      },
+      {
+        id: "charlotte",
+        name: "Charlotte",
+        role: "Het Orakel der Uren",
+        short: "Ze lijkt nooit te laat, maar altijd net te vroeg.",
+        teaser: "Tijd beweegt niet voor haar. Maar zij beweegt voor de tijd."
+      },
+      {
+        id: "otto",
+        name: "Otto",
+        role: "De Gevallen Erfgenaam",
+        short: "Hij draagt zijn verleden als een jasje dat niet meer dicht kan.",
+        teaser: "Sommige schaduwen volgen je. Andere lopen voor je uit."
+      },
+      {
+        id: "zoe",
+        name: "Zoë",
+        role: "De Vluchtige Mot",
+        short: "Je ziet haar altijd nét in je ooghoek.",
+        teaser: "Hoe lichter de kamer, hoe sneller iets verdwijnt."
+      },
+      {
+        id: "geike",
+        name: "Geike",
+        role: "De Verzamelaarster",
+        short: "Wat ze vasthoudt, laat zelden los. Mensen inclusief.",
+        teaser: "Niet alles wat ze bewaart, wil bewaard blijven."
+      },
+      {
+        id: "roos",
+        name: "Roos",
+        role: "De Wedergekeerde",
+        short: "Ze kijkt alsof ze hier al eens is verdwenen.",
+        teaser: "Wie terugkeert, komt nooit alleen terug."
+      },
+      {
+        id: "roosje",
+        name: "Roosje",
+        role: "De Betoverares",
+        short: "Alles wordt mooier als zij ernaar kijkt. En gevaarlijker.",
+        teaser: "Schoonheid is onschuldig. Tot zij het aankijkt."
+      },
+      {
+        id: "nathalie",
+        name: "Nathalie",
+        role: "De Heilige Duif",
+        short: "Ze gelooft in het goede, zelfs wanneer het huis dat niet meer doet.",
+        teaser: "Waar licht valt, verschijnt altijd een tweede pad."
+      },
+      {
+        id: "flore",
+        name: "Flore",
+        role: "De Archivarisse",
+        short: "Ze vergeet niets. Zelfs niet wat nooit is gebeurd.",
+        teaser: "Niets verdwijnt. Het wordt alleen ergens anders opgeslagen."
+      },
+      {
+        id: "seppe",
+        name: "Seppe",
+        role: "De Verzoener",
+        short: "Hij maakt dingen goed. Of op zijn minst geloofwaardig.",
+        teaser: "Vrede is zelden wat het lijkt. Rust nog minder."
+      },
+      {
+        id: "pepijn",
+        name: "Pepijn",
+        role: "De Gouden Aspirant",
+        short: "Zijn glimlach is gepolijst. Zijn ambities nog meer.",
+        teaser: "Glimmers worden goud. Goud wordt gevaar."
+      },
+      {
+        id: "ferre",
+        name: "Ferre",
+        role: "De Stormdrager",
+        short: "In de stilte om hem heen rommelt altijd iets.",
+        teaser: "Het is niet de storm buiten die telt. Het is de storm in jezelf."
+      },
+      {
+        id: "dante",
+        name: "Dante",
+        role: "De Fluisteraar",
+        short: "Sommige dingen zegt hij niet hardop. Maar je hoort ze toch.",
+        teaser: "Sommige woorden spreken zichzelf uit."
+      },
+      {
+        id: "lotte",
+        name: "Lotte",
+        role: "De Zwijgende Veer",
+        short: "Ze schrijft niet veel. Maar alles blijft hangen.",
+        teaser: "Stilte schrijft altijd de scherpste lijnen."
+      }
+    ];
+
+    const galleryEl = document.getElementById("gallery");
+    const modalEl = document.getElementById("modal");
+    const modalNameEl = document.getElementById("modalName");
+    const modalRoleEl = document.getElementById("modalRole");
+    const modalPortraitEl = document.getElementById("modalPortrait");
+    const modalTextEl = document.getElementById("modalText");
+    const modalTeaserEl = document.getElementById("modalTeaser");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    function createGallery() {
+      characters.forEach((ch) => {
+        const card = document.createElement("div");
+        card.className = "painting";
+        card.dataset.charId = ch.id;
+
+        card.innerHTML = `
+          <div class="frame-inner">
+            <div class="portrait portrait--${ch.id}">
+              ${ch.name}
+            </div>
+          </div>
+          <div class="painting-label">
+            <div class="painting-name">${ch.name}</div>
+            <div class="painting-role">${ch.role}</div>
+          </div>
+        `;
+
+        galleryEl.appendChild(card);
+      });
+    }
+
+    function openModal(charId) {
+      const ch = characters.find(c => c.id === charId);
+      if (!ch) return;
+
+      modalNameEl.textContent = ch.name;
+      modalRoleEl.textContent = ch.role;
+      modalPortraitEl.textContent = ch.name + " – " + ch.role;
+      modalTextEl.textContent = ch.short;
+      modalTeaserEl.textContent = ch.teaser;
+
+      modalEl.classList.add("active");
+    }
+
+    function closeModal() {
+      modalEl.classList.remove("active");
+    }
+
+    galleryEl.addEventListener("click", (e) => {
+      const painting = e.target.closest(".painting");
+      if (!painting) return;
+      openModal(painting.dataset.charId);
+    });
+
+    modalEl.addEventListener("click", (e) => {
+      if (e.target === modalEl) closeModal();
+    });
+
+    closeModalBtn.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    createGallery();
+  </script>
+</body>
+</html>
