@@ -46,7 +46,89 @@
       mix-blend-mode: soft-light;
       z-index: 1;
     }
+ /* HERO */
+ .section-title {
+      margin: 40px 0 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+    }
 
+    .section-subtitle {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+      font-style: italic;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 228, 188, 0.85);
+      background: radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 70%);
+      margin-bottom: 12px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(34px, 6vw, 52px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin: 4px 0 10px;
+      text-shadow:
+        0 0 18px rgba(0, 0, 0, 0.85),
+        0 0 26px rgba(212, 175, 55, 0.35);
+    }
+
+    .hero-subtitle {
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(244, 228, 188, 0.8);
+      max-width: 520px;
+      margin: 0 auto 14px;
+    }
+
+    .hero-line {
+      width: 90px;
+      height: 1px;
+      margin: 14px auto 0;
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent);
+    }
+
+    .hero-meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+    }
+
+    .hero-meta span {
+      margin: 0 8px;
+      opacity: 0.8;
+    }
     .page {
       position: relative;
       z-index: 2;
@@ -303,29 +385,24 @@
   <div class="floating-strip"></div>
 
   <main class="page">
-    <header class="nav fade delay1">
-      <div>
-        <div class="nav-title">CHÂTEAU BECKERS</div>
-        <div class="nav-sub">Een huis dat zelfs zijn trailer ernstig neemt.</div>
-      </div>
-      <nav class="nav-links">
-        <a href="intro.html">Prelude</a>
-        <a href="index.html">De Salon</a>
-        <a href="verhaal.html">Het Verhaal</a>
-        <a href="regels.html">Etiquette</a>
-        <a href="hintkamer.html">Flarden</a>
-        <a href="trailer.html" class="active">Trailer</a>
-      </nav>
-    </header>
+
+     
 
     <section class="frame fade delay2">
-      <div class="trailer-label">officiële aankondiging</div>
-      <h1 class="trailer-title">This Is Not a Birthday Party</h1>
-      <div class="trailer-sub">
+         <section class="hero">
+      <h1 class="hero-title">CHÂTEAU BECKERS</h1>
+      <p class="hero-subtitle">
         Trailer voor één avond in Château Beckers.
-      </div>
+      </p>
+      <div class="hero-line"></div>
+    </section>
 
-      <div class="divider"></div>
+    <!-- GALLERY -->
+    <section>
+      <h2 class="section-title">OFFICIËLE AANKONDIGING</h2>
+      <p class="section-subtitle">
+         Kijk met geluid.  Het huis luistert mee naar wie lacht op de verkeerde momenten.
+      </p>
 
       <div class="video-wrap">
         <!-- 👉 PAS HIER HET PAD VAN JE VIDEO AAN -->
@@ -341,9 +418,6 @@
         <small>Het huis luistert mee naar wie lacht op de verkeerde momenten.</small>
       </div>
 
-      <div class="back">
-        <a href="intro.html">‹ terug naar het huis</a>
-      </div>
     </section>
   </main>
 </body>
