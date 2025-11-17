@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Château Nocturne – Prelude</title>
+  <title>Prelude</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -82,6 +82,24 @@
       overflow: hidden;
     }
 
+    
+    .section-title {
+      margin: 40px 0 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+    }
+
+    .section-subtitle {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+      font-style: italic;
+    }
     .frame::before {
       content: "";
       position: absolute;
@@ -220,16 +238,6 @@
       border-radius: 999px;
       background: var(--gold);
       box-shadow: 0 0 9px rgba(212, 175, 55, 0.9);
-    }
-
-    .pretitle {
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(244, 228, 188, 0.8);
-      margin-bottom: 8px;
-      text-align: center;
     }
 
     .title {
@@ -416,15 +424,21 @@
           <span class="badge-dot"></span>
           CECI N'EST PAS UNE FÊTE D'ANNIVERSAIRE
         </div>
-        <div class="pretitle">PRELUDE</div>
         <h1 class="title">CHÂTEAU BECKERS</h1>
         <div class="line"></div>
       </div>
 
+      <section>
+           <h2 class="section-title">PRELUDE</h2>
+      <p class="section-subtitle">
+        Het Huis onthoudt wie er aanklopt.
+      </p>
+      </section>
+
       <div class="fade-step step2">
         <p class="lead">
-          Er is enkel gezegd dat er samen gegeten wordt.  
-          Dat er iets gedronken wordt.  
+          Er is enkel gezegd dat er samen gegeten wordt.  <br>
+          Dat er iets gedronken wordt.  <br>
           Dat dit genoeg informatie was.
         </p>
       </div>
@@ -469,9 +483,10 @@
             <span class="icon">⟡</span>
             WIE ZOEKT...
           </a>
-          <div class="cta-caption">
-            Het Huis onthoudt wie er aanklopt.
-          </div>
+            <a class="cta-btn" href="trailer.html">
+            <span class="icon">⟡</span>
+            TRAILER
+          </a>
         </div>
         <div class="footer-line">
           CECI N'EST PAS UN JEU DE MEURTRE

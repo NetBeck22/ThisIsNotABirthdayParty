@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trailer – This Is Not a Birthday Party | Château Beckers</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --bone: #f4e4bc;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(212,175,55,0.18), transparent 55%),
+        radial-gradient(circle at 80% 95%, rgba(120,90,160,0.25), transparent 60%),
+        linear-gradient(145deg, #050307 0%, #120a0f 45%, #0b0507 100%);
+      font-family: 'Playfair Display', serif;
+      color: var(--bone);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='noStitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* surreal decor */
+
+    .floating-reel {
+      position: fixed;
+      top: 10%;
+      right: 8%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,175,55,0.4);
+      opacity: 0.2;
+      background:
+        conic-gradient(from 210deg, rgba(212,175,55,0.3), transparent 40%, transparent 70%, rgba(244,228,188,0.3));
+      mask-image: radial-gradient(circle at center, black 40%, transparent 70%);
+      animation: reelSpin 22s linear infinite;
+      z-index: 1;
+    }
+
+    .floating-strip {
+      position: fixed;
+      left: 6%;
+      bottom: 14%;
+      width: 180px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid rgba(244,228,188,0.3);
+      opacity: 0.2;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(244,228,188,0.4) 0px,
+          rgba(244,228,188,0.4) 6px,
+          transparent 6px,
+          transparent 12px
+        );
+      animation: stripDrift 18s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes reelSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes stripDrift {
+      0% { transform: translateY(0) rotate(-8deg); opacity: 0.18; }
+      100% { transform: translateY(-16px) rotate(-3deg); opacity: 0.3; }
+    }
+
+    /* nav */
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .nav-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244,228,188,0.9);
+    }
+    .nav-sub {
+      font-size: 11px;
+      color: rgba(244,228,188,0.65);
+      font-style: italic;
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(244,228,188,0.75);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.24s ease;
+    }
+    .nav-links a:hover {
+      border-color: rgba(212,175,55,0.75);
+      background: radial-gradient(circle, rgba(212,175,55,0.2), transparent 70%);
+      color: var(--bone);
+    }
+    .nav-links a.active {
+      border-color: rgba(212,175,55,1);
+      background: radial-gradient(circle, rgba(212,175,55,0.32), transparent 70%);
+      box-shadow: 0 0 16px rgba(212,175,55,0.45);
+      color: var(--bone);
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* main block */
+
+    .frame {
+      margin-top: 10px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 0 0, rgba(244,228,188,0.08), transparent 60%),
+        linear-gradient(135deg, #1b0f13, #090406);
+      border: 1px solid rgba(212,175,55,0.7);
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.9),
+        0 0 26px rgba(212,175,55,0.4);
+      padding: 20px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(244,228,188,0.18);
+      pointer-events: none;
+    }
+
+    .trailer-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.9);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .trailer-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 3.3vw, 24px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0;
+    }
+
+    .trailer-sub {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(244,228,188,0.8);
+      font-style: italic;
+      margin-top: 6px;
+      margin-bottom: 16px;
+    }
+
+    .divider {
+      width: 110px;
+      height: 1px;
+      margin: 0 auto 20px;
+      background: linear-gradient(to right, transparent, rgba(212,175,55,0.85), transparent);
+    }
+
+    .video-wrap {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(244,228,188,0.4);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.9),
+        0 0 18px rgba(0,0,0,0.8);
+      background: #000;
+    }
+
+    .trailer-video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      background: #000;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0%, transparent 60%, rgba(0,0,0,0.7) 100%);
+      mix-blend-mode: soft-light;
+    }
+
+    .video-note {
+      margin-top: 12px;
+      font-size: 12px;
+      text-align: center;
+      color: rgba(244,228,188,0.7);
+      font-style: italic;
+    }
+
+    .video-note small {
+      display: block;
+      font-size: 10px;
+      opacity: 0.85;
+    }
+
+    .back {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .back a {
+      color: rgba(244,228,188,0.8);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(244,228,188,0.6);
+      padding-bottom: 2px;
+      transition: 0.24s;
+    }
+    .back a:hover {
+      color: var(--gold);
+      border-color: rgba(212,175,55,0.9);
+    }
+
+    /* fade */
+
+    .fade {
+      opacity: 0;
+      transform: translateY(6px);
+      animation: fadeUp 0.7s ease-out forwards;
+    }
+    .delay1 { animation-delay: 0.25s; }
+    .delay2 { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-reel"></div>
+  <div class="floating-strip"></div>
+
+  <main class="page">
+    <header class="nav fade delay1">
+      <div>
+        <div class="nav-title">CHÂTEAU BECKERS</div>
+        <div class="nav-sub">Een huis dat zelfs zijn trailer ernstig neemt.</div>
+      </div>
+      <nav class="nav-links">
+        <a href="intro.html">Prelude</a>
+        <a href="index.html">De Salon</a>
+        <a href="verhaal.html">Het Verhaal</a>
+        <a href="regels.html">Etiquette</a>
+        <a href="hintkamer.html">Flarden</a>
+        <a href="trailer.html" class="active">Trailer</a>
+      </nav>
+    </header>
+
+    <section class="frame fade delay2">
+      <div class="trailer-label">officiële aankondiging</div>
+      <h1 class="trailer-title">This Is Not a Birthday Party</h1>
+      <div class="trailer-sub">
+        Trailer voor één avond in Château Beckers.
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="video-wrap">
+        <!-- 👉 PAS HIER HET PAD VAN JE VIDEO AAN -->
+        <video class="trailer-video" controls playsinline>
+          <source src="portretten/goed.mp4" type="video/mp4" />
+          Je browser ondersteunt de video tag niet.
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+
+      <div class="video-note">
+        Kijk met geluid.  
+        <small>Het huis luistert mee naar wie lacht op de verkeerde momenten.</small>
+      </div>
+
+      <div class="back">
+        <a href="intro.html">‹ terug naar het huis</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
