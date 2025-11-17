@@ -49,7 +49,89 @@
       mix-blend-mode: soft-light;
       z-index: 1;
     }
+/* HERO */
+ .section-title {
+      margin: 40px 0 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+    }
 
+    .section-subtitle {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+      font-style: italic;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 228, 188, 0.85);
+      background: radial-gradient(circle at top, rgba(212, 175, 55, 0.18), transparent 70%);
+      margin-bottom: 12px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(34px, 6vw, 52px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin: 4px 0 10px;
+      text-shadow:
+        0 0 18px rgba(0, 0, 0, 0.85),
+        0 0 26px rgba(212, 175, 55, 0.35);
+    }
+
+    .hero-subtitle {
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(244, 228, 188, 0.8);
+      max-width: 520px;
+      margin: 0 auto 14px;
+    }
+
+    .hero-line {
+      width: 90px;
+      height: 1px;
+      margin: 14px auto 0;
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent);
+    }
+
+    .hero-meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(244, 228, 188, 0.7);
+    }
+
+    .hero-meta span {
+      margin: 0 8px;
+      opacity: 0.8;
+    }
     .page {
       position: relative;
       z-index: 2;
