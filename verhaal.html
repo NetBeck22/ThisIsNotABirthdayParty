@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Château Beckers – Het Verhaal</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #050308;
+      --bg-deep: #120910;
+      --gold: #d4af37;
+      --bone: #f4e4bc;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.18), transparent 55%),
+        radial-gradient(circle at 82% 88%, rgba(120, 90, 160, 0.28), transparent 60%),
+        linear-gradient(145deg, #050307 0%, #120a0f 40%, #090507 100%);
+      color: var(--bone);
+      font-family: 'Playfair Display', serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, transparent 0%, transparent 45%, rgba(0,0,0,0.82) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='noStitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* surreal decor */
+
+    .floating-window {
+      position: fixed;
+      top: 6%;
+      right: 8%;
+      width: 150px;
+      height: 200px;
+      border-radius: 4px;
+      border: 1px solid rgba(212,175,55,0.4);
+      box-shadow: 0 0 24px rgba(0,0,0,0.9);
+      overflow: hidden;
+      opacity: 0.18;
+      z-index: 1;
+      animation: windowGlow 18s ease-in-out infinite alternate;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.9), rgba(20,14,40,0.6)),
+        radial-gradient(circle at top, rgba(244,228,188,0.3), transparent 70%);
+    }
+
+    .floating-window::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(244,228,188,0.2);
+    }
+
+    .floating-crack {
+      position: fixed;
+      left: 7%;
+      bottom: 16%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px dashed rgba(244,228,188,0.25);
+      opacity: 0.2;
+      z-index: 1;
+      background:
+        conic-gradient(from 210deg, rgba(244,228,188,0.2), transparent 30%, transparent 70%, rgba(212,175,55,0.25));
+      mask-image: radial-gradient(circle at center, black 0%, black 40%, transparent 70%);
+      animation: crackSpin 26s linear infinite;
+    }
+
+    .floating-text-frag {
+      position: fixed;
+      left: 15%;
+      top: 20%;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244,228,188,0.45);
+      transform: rotate(-7deg);
+      opacity: 0.5;
+      animation: fragDrift 22s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes windowGlow {
+      0% { transform: translateY(0) scale(1); opacity: 0.12; }
+      100% { transform: translateY(18px) scale(1.03); opacity: 0.22; }
+    }
+    @keyframes crackSpin {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(360deg) scale(1.06); }
+    }
+    @keyframes fragDrift {
+      0% { transform: translateY(0) translateX(0) rotate(-7deg); }
+      100% { transform: translateY(-18px) translateX(16px) rotate(-3deg); }
+    }
+
+    /* header */
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .nav-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244,228,188,0.9);
+    }
+
+    .nav-sub {
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(244,228,188,0.65);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(244,228,188,0.7);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.24s ease;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(212,175,55,0.7);
+      color: var(--bone);
+      background: radial-gradient(circle at top, rgba(212,175,55,0.2), transparent 70%);
+    }
+
+    .nav-links a.active {
+      border-color: rgba(212,175,55,0.9);
+      color: var(--bone);
+      background:
+        radial-gradient(circle at top, rgba(212,175,55,0.26), transparent 70%);
+      box-shadow: 0 0 12px rgba(212,175,55,0.35);
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* story */
+
+    .section-label {
+      margin-top: 18px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.9);
+    }
+
+    .story-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(26px, 4vw, 32px);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 6px 0 10px;
+      color: var(--bone);
+    }
+
+    .story-sub {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(244,228,188,0.8);
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,175,55,0.85), transparent);
+      margin-bottom: 20px;
+    }
+
+    .story-body {
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(244,228,188,0.9);
+    }
+
+    .story-body p {
+      margin: 0 0 16px;
+    }
+
+    .story-body em {
+      color: rgba(244,228,188,0.9);
+    }
+
+    .dropcap {
+      font-family: 'Cinzel', serif;
+      font-size: 34px;
+      float: left;
+      line-height: 1;
+      margin-right: 8px;
+      margin-top: 3px;
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+
+    .story-block {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(244,228,188,0.16);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(244,228,188,0.06), transparent 65%),
+        linear-gradient(135deg, rgba(8,4,6,0.95), rgba(14,8,12,0.96));
+      font-size: 13px;
+      color: rgba(244,228,188,0.85);
+      font-style: italic;
+    }
+
+    .story-block-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.9);
+      margin-bottom: 8px;
+    }
+
+    .footnote {
+      margin-top: 24px;
+      font-size: 11px;
+      color: rgba(244,228,188,0.6);
+      font-style: italic;
+    }
+
+    .back-link {
+      margin-top: 28px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .back-link a {
+      color: rgba(244,228,188,0.8);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(244,228,188,0.5);
+      padding-bottom: 2px;
+      transition: color 0.24s ease, border-color 0.24s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--gold);
+      border-color: rgba(212,175,55,0.85);
+    }
+
+    /* fade-in */
+
+    .fade {
+      opacity: 0;
+      transform: translateY(6px);
+      animation: fadeUp 0.7s ease-out forwards;
+    }
+
+    .fade.delay1 { animation-delay: 0.25s; }
+    .fade.delay2 { animation-delay: 0.5s; }
+    .fade.delay3 { animation-delay: 0.9s; }
+    .fade.delay4 { animation-delay: 1.3s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="floating-window"></div>
+  <div class="floating-crack"></div>
+  <div class="floating-text-frag">CHÂTEAU BECKERS · ECHO · HERINNERING</div>
+
+  <main class="page">
+    <header class="nav fade delay1">
+      <div>
+        <div class="nav-title">CHÂTEAU BECKERS</div>
+        <div class="nav-sub">Een huis herinnert zich meer dan zijn bewoners.</div>
+      </div>
+      <nav class="nav-links">
+        <a href="intro.html">Prelude</a>
+        <a href="index.html">De Salon</a>
+        <a href="verhaal.html" class="active">Het Verhaal</a>
+      </nav>
+    </header>
+
+    <section class="fade delay2">
+      <div class="section-label">achtergrond</div>
+      <h1 class="story-title">De Geschiedenis van Château Beckers</h1>
+      <div class="story-sub">
+        Dit is de versie die het huis toelaat om verteld te worden.
+      </div>
+      <div class="divider"></div>
+    </section>
+
+    <section class="story-body fade delay3">
+      <p>
+        <span class="dropcap">E</span>r was ooit een familie Beckers, maar niemand is het erover eens  
+        <em>welke</em> Beckers precies. In oude papieren duiken hun namen op in verschillende spellingen,  
+        in contracten die elkaar tegenspreken, in brieven die nooit verstuurd lijken, maar wel beantwoord zijn.
+      </p>
+
+      <p>
+        Wat vaststaat: ergens tussen de nette burgerlijkheid en het theatrale van een te grote droom  
+        liet iemand een huis bouwen dat net geen kasteel mocht heten.  
+        Te veel kamers. Te veel gangen. Te veel spiegels die dingen onthouden  
+        die nooit gebeurd zouden mogen zijn.
+      </p>
+
+      <p>
+        De buurt noemde het al snel <em>Château Beckers</em> – half uit spot, half uit respect.  
+        Want het huis bleek een talent te hebben voor het verzamelen van avonden  
+        die niet helemaal klopten. Dineetjes waar mensen iets te lang wegbleven in de gang.  
+        Feesten waar iemand zweerde dat een schilderij met hem knipoogde.  
+        Toasts die veranderden in bekentenissen, zonder dat iemand het had gepland.
+      </p>
+
+      <p>
+        De familie verdween niet opeens. Ze zijn er gewoon op een dag niet meer.  
+        Geen ramp, geen brand, geen spektakel. Alleen een reeks stille verhuizingen,  
+        onafgewerkte verkopen, en een notaris die in de marge schreef:  
+        <em>“eigendom in afwachting van heldere omstandigheden.”</em>
+      </p>
+
+      <div class="story-block">
+        <div class="story-block-title">Wat het huis zelf onthoudt</div>
+        <p>
+          Rond de jaren ’20, zo fluisteren sommige documenten,  
+          begon het huis zich te gedragen alsof het een eigen geheugen had.  
+          Stoelen die terug op hun oude plaats schoven.  
+          Een klok die steeds op hetzelfde uur bleef staan,  
+          zelfs nadat hij uit elkaar gehaald was.
+        </p>
+        <p>
+          In één verslag – zonder duidelijke auteur – staat:  
+          <em>“Als mensen hier liegen, kraakt de vloer onder iemand anders zijn voeten.”</em>  
+          Een andere notitie zegt:  
+          <em>“Wie hier een glas heft, heft tegelijk iets in zichzelf op.”</em>
+        </p>
+      </div>
+
+      <p>
+        Jaren gingen voorbij. Château Beckers kreeg een nieuw behang,  
+        een nieuwe generatie, een nieuwe gossipstatus.  
+        Maar onder elke laag verf zit nog een vorige.  
+        En daaronder nog één. En ergens daar, diep in de muren,  
+        zitten avonden vast die nooit helemaal zijn afgewerkt.
+      </p>
+
+      <p>
+        Af en toe, zo gaat het verhaal, besluit het huis dat het tijd is  
+        voor een nieuwe avond die bij de verzameling mag.  
+        Dan wordt er een tafel gedekt.  
+        Worden glazen klaargezet.  
+        Wordt er gezegd:  
+        <em>“Kom gewoon eten. We drinken iets. Dat is alles.”</em>
+      </p>
+
+      <p>
+        Wie binnenstapt, merkt vroeg of laat dat Château Beckers  
+        een simpel principe heeft:  
+        het geeft je nooit méér informatie dan nodig.  
+        Maar het luistert wel naar alles wat je niet hardop zegt.
+      </p>
+
+      <div class="story-block">
+        <div class="story-block-title">Over de nacht die nu komt</div>
+        <p>
+          Deze keer is het geen gala, geen officiële receptie,  
+          geen familiefeest met nette uitnodigingen.  
+          Het is een avond waarvan de officiële omschrijving is:  
+          <em>“samen eten en iets drinken.”</em>
+        </p>
+        <p>
+          Voor Château Beckers is dat voldoende.  
+          Meer heeft het huis nooit nodig gehad om te beginnen.
+        </p>
+      </div>
+
+      <div class="footnote">
+        Sommige huizen hebben muren.  
+        Château Beckers heeft een geheugen.
+      </div>
+
+      <div class="back-link">
+        <a href="index.html">‹ terug naar de salon</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
