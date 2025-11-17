@@ -609,6 +609,16 @@
       color: rgba(244, 228, 188, 0.6);
       font-style: italic;
     }
+.painting-freeroam {
+  position: fixed; /* zodat ze vrij over het scherm bewegen */
+  top: 0;
+  left: 0;
+  will-change: transform;
+  pointer-events: auto; /* zodat je er nog op kunt klikken */
+  animation-name: floatAcrossScreen;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
     /* Fade-in steps */
 
@@ -628,6 +638,14 @@
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
+@keyframes floatAcrossScreen {
+  0% {
+    transform: translate(var(--start-x), var(--start-y));
+  }
+  100% {
+    transform: translate(var(--end-x), var(--end-y));
+  }
+}
 
     @media (max-width: 600px) {
       .frame {
@@ -834,13 +852,25 @@
 function createGallery() {
   characters.forEach((ch) => {
     const card = document.createElement("div");
-    card.className = "painting painting-floating"; // extra class
-
+    card.className = "painting painting-freeroam";
     card.dataset.charId = ch.id;
 
-    // willekeurige duur en delay zodat ze niet synchroon bewegen
-    const duration = 16 + Math.random() * 10; // 16–26s
-    const delay = Math.random() * 8;          // 0–8s
+    // willekeurige start- en eindposities over het scherm
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+    const endX = Math.random() * window.innerWidth;
+    const endY = Math.random() * window.innerHeight;
+
+    // CSS-variabelen instellen
+    card.style.setProperty("--start-x", `${startX}px`);
+    card.style.setProperty("--start-y", `${startY}px`);
+    card.style.setProperty("--end-x", `${endX}px`);
+    card.style.setProperty("--end-y", `${endY}px`);
+
+    // random duur + delay
+    const duration = 25 + Math.random() * 20;
+    const delay = Math.random() * 10;
+
     card.style.animationDuration = `${duration}s`;
     card.style.animationDelay = `${delay}s`;
 
@@ -856,7 +886,7 @@ function createGallery() {
       </div>
     `;
 
-    galleryEl.appendChild(card);
+    document.body.appendChild(card); // BELANGRIJK: niet in de grid!
   });
 }
 
