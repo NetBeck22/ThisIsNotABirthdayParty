@@ -402,25 +402,6 @@
       color: rgba(244, 228, 188, 0.7);
     }
 
-    /* Zelfde stijl als :hover, maar dan via een class */
-.painting.active {
-  transform: translateY(-6px) scale(1.03);
-  border-color: rgba(212, 175, 55, 0.8);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.9),
-    0 0 26px rgba(212, 175, 55, 0.35);
-}
-
-.painting.active::before {
-  opacity: 1;
-}
-
-/* Video tonen wanneer card "actief" is */
-.painting.active .portrait-video {
-  opacity: 1;
-}
-
-
     /* MODAL */
 
     .modal {
@@ -895,44 +876,11 @@ card.innerHTML = `
       modalEl.classList.remove("active");
     }
 
- const isTouch = window.matchMedia("(hover: none)").matches;
-
-galleryEl.addEventListener("click", (e) => {
-  const painting = e.target.closest(".painting");
-  if (!painting) return;
-  const charId = painting.dataset.charId;
-  const video = painting.querySelector(".portrait-video");
-
-  if (isTouch) {
-    // Op touch (gsm): eerste tik = active + video, tweede tik = modal
-    if (!painting.classList.contains("active")) {
-      // Eerst alle andere kaarten resetten
-      document.querySelectorAll(".painting.active").forEach(card => {
-        card.classList.remove("active");
-        const v = card.querySelector(".portrait-video");
-        if (v) {
-          v.pause();
-          v.currentTime = 0;
-        }
-      });
-
-      painting.classList.add("active");
-
-      if (video) {
-        video.currentTime = 0;
-        video.play().catch(() => {
-          // soms blokkeert een browser, maar meestal oké na user interactie
-        });
-      }
-    } else {
-      // tweede tik op dezelfde kaart → modal openen
-      openModal(charId);
-    }
-  } else {
-    // Desktop: gewoon meteen modal
-    openModal(charId);
-  }
-});
+    galleryEl.addEventListener("click", (e) => {
+      const painting = e.target.closest(".painting");
+      if (!painting) return;
+      openModal(painting.dataset.charId);
+    });
 
     modalEl.addEventListener("click", (e) => {
       if (e.target === modalEl) closeModal();
