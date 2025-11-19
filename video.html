@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Videogalerij – Château Beckers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #040307;
+      --fg: #f4e4bc;
+      --muted: rgba(244,228,188,0.68);
+      --gold: #d4af37;
+    }
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(212,175,55,0.14), transparent 55%),
+        radial-gradient(circle at 80% 95%, rgba(120,90,160,0.2), transparent 60%),
+        linear-gradient(145deg, #050307 0%, #120a0f 45%, #050307 100%);
+      font-family: 'Playfair Display', serif;
+      color: var(--fg);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='noStitch'/%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* minimal nav bovenaan */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 26px;
+      border-bottom: 1px solid rgba(212,175,55,0.25);
+      padding-bottom: 10px;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(244,228,188,0.35), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(120,90,160,0.5), transparent 65%),
+        #12070b;
+      box-shadow: 0 0 12px rgba(0,0,0,0.8);
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.09em;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      font-size: 10px;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(244,228,188,0.8);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: 0.24s ease;
+    }
+    .nav-links a:hover {
+      border-color: rgba(212,175,55,0.8);
+      background: radial-gradient(circle, rgba(212,175,55,0.2), transparent 70%);
+      color: var(--fg);
+    }
+    .nav-links a.active {
+      border-color: rgba(212,175,55,1);
+      background: radial-gradient(circle, rgba(212,175,55,0.28), transparent 70%);
+      box-shadow: 0 0 14px rgba(212,175,55,0.45);
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* header text */
+    .header {
+      margin: 24px 0 18px;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(244,228,188,0.7);
+      margin-bottom: 6px;
+    }
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(22px, 3.4vw, 26px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .intro {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    /* grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 8px;
+      background:
+        radial-gradient(circle at 0 0, rgba(244,228,188,0.07), transparent 60%),
+        linear-gradient(135deg, #1b0f13, #090406);
+      border: 1px solid rgba(244,228,188,0.18);
+      box-shadow:
+        0 16px 36px rgba(0,0,0,0.9),
+        0 0 18px rgba(0,0,0,0.7);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 22px 46px rgba(0,0,0,0.95),
+        0 0 24px rgba(212,175,55,0.38);
+      border-color: rgba(212,175,55,0.8);
+    }
+
+    .video-frame {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(244,228,188,0.4);
+      background: #000;
+      position: relative;
+      aspect-ratio: 9 / 16; /* portret-videos */
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+
+    .video-meta {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .video-name {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .video-role {
+      font-size: 11px;
+      color: rgba(244,228,188,0.75);
+      font-style: italic;
+    }
+
+    .video-badge {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(4,3,7,0.86);
+      border: 1px solid rgba(244,228,188,0.6);
+      color: rgba(244,228,188,0.9);
+    }
+
+    .sound-indicator {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(4,3,7,0.86);
+      border: 1px solid rgba(244,228,188,0.5);
+      color: rgba(244,228,188,0.75);
+      pointer-events: none;
+    }
+
+    .video-card:hover .sound-indicator {
+      color: var(--gold);
+      border-color: rgba(212,175,55,0.9);
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(244,228,188,0.4);
+      padding-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo">CB</div>
+        <div class="brand-text">
+          <span class="brand-title">Château Beckers</span>
+          <span class="brand-sub">Levende schilderijen</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="intro.html">Prelude</a>
+        <a href="trailer.html">Trailer</a>
+        <a href="verhaal.html">Verhaal</a>
+        <a href="hintkamer.html">Hints</a>
+        <a href="videos.html" class="active">Videoportretten</a>
+      </nav>
+    </header>
+
+    <!-- HEADER -->
+    <section class="header">
+      <div class="section-label">videogalerij</div>
+      <h1 class="title">Levende portretten</h1>
+      <p class="intro">
+        Een raster vol schilderijen die zacht tot leven komen.  
+        Alle gasten van Château Beckers, gevangen in bewegende verf.
+        Beweeg met je cursor of vinger over een portret om hun stem te horen.
+      </p>
+    </section>
+
+    <!-- GRID -->
+    <section class="video-grid">
+      <!-- 🔁 1 video-card per person / video -->
+      <!-- Vervang de src's door jouw echte videobestanden -->
+
+      <article class="video-card" data-name="Nette" data-role="De Fluwelen Slang">
+        <div class="video-frame">
+          <video
+            src="videos/nette.mp4"
+            muted
+            playsinline
+            loop
+          ></video>
+          <div class="video-overlay"></div>
+          <div class="video-badge">nette</div>
+          <div class="sound-indicator">sound on hover</div>
+        </div>
+        <div class="video-meta">
+          <div class="video-name">Nette</div>
+          <div class="video-role">De Fluwelen Slang</div>
+        </div>
+      </article>
+
+      <article class="video-card" data-name="Charlotte" data-role="Het Orakel van de Uren">
+        <div class="video-frame">
+          <video
+            src="videos/charlotte.mp4"
+            muted
+            playsinline
+            loop
+          ></video>
+          <div class="video-overlay"></div>
+          <div class="video-badge">charlotte</div>
+          <div class="sound-indicator">sound on hover</div>
+        </div>
+        <div class="video-meta">
+          <div class="video-name">Charlotte</div>
+          <div class="video-role">Het Orakel van de Uren</div>
+        </div>
+      </article>
+
+      <article class="video-card" data-name="Otto" data-role="De Gevallen Erfgenaam">
+        <div class="video-frame">
+          <video
+            src="videos/otto.mp4"
+            muted
+            playsinline
+            loop
+          ></video>
+          <div class="video-overlay"></div>
+          <div class="video-badge">otto</div>
+          <div class="sound-indicator">sound on hover</div>
+        </div>
+        <div class="video-meta">
+          <div class="video-name">Otto</div>
+          <div class="video-role">De Gevallen Erfgenaam</div>
+        </div>
+      </article>
+
+      <!-- ➕ Voeg hier de rest toe: Zoe, Geike, Roos, Roosje, Natalie, Flore, Seppe, Pepijn, Ferre, Dante, Lotte... -->
+      <!-- Kopieer de <article> en pas name, role, src, badge aan. -->
+
+    </section>
+
+    <footer>
+      Gemaakt voor één avond in Château Beckers.<br />
+      <a href="intro.html">‹ terug naar de prelude</a>
+    </footer>
+  </main>
+
+  <script>
+    // Alle video's automatisch laten spelen (muted, loop)
+    const videos = document.querySelectorAll('.video-frame video');
+
+    videos.forEach(video => {
+      video.play().catch(() => {
+        // sommige browsers blokkeren autoplay, maar muted+playsinline helpt
+      });
+    });
+
+    // Hover = sound aan, hover weg = weer uit
+    document.querySelectorAll('.video-card').forEach(card => {
+      const video = card.querySelector('video');
+
+      card.addEventListener('mouseenter', () => {
+        if (!video) return;
+        video.muted = false;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (!video) return;
+        video.muted = true;
+      });
+    });
+
+    // Optioneel: pauzeer als ze buiten beeld scrollen
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const vid = entry.target.querySelector('video');
+        if (!vid) return;
+        if (entry.isIntersecting) {
+          vid.play().catch(() => {});
+        } else {
+          vid.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('.video-card').forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
