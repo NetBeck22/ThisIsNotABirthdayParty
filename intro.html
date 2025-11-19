@@ -285,6 +285,28 @@
       overflow: hidden;
     }
 
+    .portrait {
+  position: relative;
+  overflow: hidden;
+}
+
+.portrait-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Video tonen bij hover */
+.painting:hover .portrait-video {
+  opacity: 1;
+}
+
+
     .portrait--nette {
       background-image: url('portretten/nette.jpg');
       background-size: cover;
@@ -816,17 +838,23 @@
         card.className = "painting";
         card.dataset.charId = ch.id;
 
-        card.innerHTML = `
-          <div class="frame-inner">
-            <div class="portrait portrait--${ch.id}">
-              ${ch.name}
-            </div>
-          </div>
-          <div class="painting-label">
-            <div class="painting-name">${ch.name}</div>
-            <div class="painting-role">${ch.role}</div>
-          </div>
-        `;
+card.innerHTML = `
+  <div class="frame-inner">
+    <div class="portrait portrait--${ch.id}">
+      ${ch.name}
+      <video class="portrait-video" muted loop playsinline preload="metadata">
+        <source src="videos/${ch.id}.mp4" type="video/mp4">
+        <!-- fallback tekst -->
+        Je browser ondersteunt geen video.
+      </video>
+    </div>
+  </div>
+  <div class="painting-label">
+    <div class="painting-name">${ch.name}</div>
+    <div class="painting-role">${ch.role}</div>
+  </div>
+`;
+
 
         galleryEl.appendChild(card);
       });
@@ -864,7 +892,31 @@
       if (e.key === "Escape") closeModal();
     });
 
-    createGallery();
+    // Video afspelen bij hover, pauzeren bij weggaan
+function setupHoverVideo() {
+  const cards = document.querySelectorAll(".painting");
+
+  cards.forEach(card => {
+    const video = card.querySelector(".portrait-video");
+    if (!video) return;
+
+    card.addEventListener("mouseenter", () => {
+      video.currentTime = 0; // altijd vanaf begin
+      video.play().catch(() => {
+        // sommige browsers blokkeren soms, maar meestal oké omdat het hover is
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+}
+
+createGallery();
+setupHoverVideo();
+
   </script>
 </body>
 </html>
